@@ -1,0 +1,62 @@
+<!-- resources/views/detailpenjualan/create.blade.php -->
+
+@extends('layouts.app')
+
+@section('content')
+<div class="container mt-5">
+    <div class="col-md-6 mx-auto">
+        <h2 class="mb-3">Tambah Detail Penjualan</h2>
+
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <strong>Error:</strong>
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+        <form action="{{ route('detailpenjualan.store') }}" method="POST" class="border rounded p-3 bg-light text-dark">
+            @csrf
+
+            <div class="mb-2">
+                <label for="PenjualanID" class="form-label">Kode Transaksi :</label>
+                {{-- <input type="number" class="form-control" name="PenjualanID" required> --}}
+                <select class="form-select" name="PenjualanID" id="PenjualanID" required>
+                    <option value="">Pilih Kode Transaksi</option>
+                    @foreach ($penjualan as $p)
+                        <option value="{{$p->PenjualanID}}">{{$p->PenjualanID}}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="mb-2">
+                <label for="ProdukID" class="form-label">Nama Produk :</label>
+                {{-- <input type="number" class="form-control" name="ProdukID" required> --}}
+                <select class="form-select" name="ProdukID" id="ProdukID" required>
+                    <option value="">Pilih Produk</option>
+                    @foreach ($produk as $p)
+                        <option value="{{$p->ProdukID}}">{{$p->NamaProduk}}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="mb-2">
+                <label for="JumlahProduk" class="form-label">Jumlah Produk:</label>
+                <input type="number" class="form-control form-control-sm" name="JumlahProduk" value="{{ old('JumlahProduk') }}" required>
+            </div>
+
+            {{-- <div class="mb-2">
+                <label for="Subtotal" class="form-label">Subtotal:</label>
+                <input type="number" class="form-control form-control-sm" name="Subtotal" value="{{ old('Subtotal') }}" required>
+            </div> --}}
+
+            <!-- Add other necessary form fields -->
+
+            <button type="submit" class="btn btn-primary bg-primary btn-sm">Tambah</button>
+        </form>
+    </div>
+</div>
+@endsection
