@@ -5,12 +5,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>WieDrink</title>
+  <title>WieCash</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="{{ asset('temp/assets/img/favicon.png') }}" rel="icon">
   <link href="{{ asset('temp/assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
   <link href="{{ asset('temp/assets/img/favicon.png') }}" rel="icon">
 
@@ -43,7 +42,7 @@
   <header id="header" class="d-flex align-items-center">
     <div class="container d-flex align-items-center justify-content-between">
 
-      <h1 class="logo"><a href="#">WieDrink<span>.</span></a></h1>
+      <h1 class="logo"><a href="#">WieCash<span>.</span></a></h1>
       <nav id="navbar" class="navbar">
         <ul>
             @if (Route::has('login'))
@@ -66,8 +65,8 @@
   <!-- ======= Hero Section ======= -->
   <section id="hero" class="d-flex align-items-center">
     <div class="container" data-aos="zoom-out" data-aos-delay="100">
-      <h1>Welcome to <span>WieDrink</span></h1>
-      <h2>Buat Pembayaranmu Menjadi Lebih Mudah!</h2>
+      <h1>Welcome to <span>WieCash</span></h1>
+      <h2>Buat Pembayaranmu Lebih Mudah!</h2>
       <div class="d-flex">
         <a href="{{ route('login') }}" class="btn-get-started scrollto">Mulai</a></div>
     </div>
@@ -149,14 +148,14 @@
 
     <div class="container py-4">
       <div class="copyright">
-        &copy; Copyright <strong><span>WieDrink</span></strong>. All Rights Reserved
+        &copy; Copyright <strong><span>WieCash</span></strong>. All Rights Reserved
       </div>
       <div class="credits">
         <!-- All the links in the footer should remain intact. -->
         <!-- You can delete the links only if you purchased the pro version. -->
         <!-- Licensing information: https://bootstrapmade.com/license/ -->
         <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/bizland-bootstrap-business-template/ -->
-        Designed by <a href="https://bootstrapmade.com/">Wiee</a>
+        Designed by <a href="https://bootstrapmade.com/">Wie</a>
       </div>
     </div>
   </footer><!-- End Footer -->

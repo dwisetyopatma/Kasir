@@ -38,6 +38,13 @@
             <button type="submit" class="btn btn-warning btn-sm bg-warning text-light">Update</button>
         </form>
 
+        <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            <input type="file" name="image">
+            <!-- Form fields for other product details -->
+            <button type="submit">Submit</button>
+        </form>
+
     </div>
 </div>
 @endsection

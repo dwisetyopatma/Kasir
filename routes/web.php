@@ -60,3 +60,8 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+Route::get('/petugas/dashboard', function () {
+    return view('dashboard_petugas');
+})->middleware(['auth:petugas', 'verified'])->name('dashboard_petugas');
+require __DIR__.'/petugasauth.php';

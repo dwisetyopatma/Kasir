@@ -40,6 +40,12 @@
 
             <button type="submit" class="btn btn-primary btn-sm bg-primary text-light">Tambah</button>
         </form>
+        <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            <input type="file" name="image">
+            <!-- Form fields for other product details -->
+            <button type="submit">Submit</button>
+        </form>
     </div>
 </div>
 @endsection
