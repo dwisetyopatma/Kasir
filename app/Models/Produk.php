@@ -14,5 +14,6 @@ class Produk extends Model
         "NamaProduk",
         "Harga",
         "Stok",
+        "Gambar",
     ];
 }

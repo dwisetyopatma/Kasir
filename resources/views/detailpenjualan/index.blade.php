@@ -20,7 +20,8 @@
             <tr>
                 {{-- <td>{{ $detailpenjualan->DetailID }}</td> --}}
                 <td>{{ $detailpenjualan->PenjualanID }}</td>
-                <td>{{ $detailpenjualan->Produk->NamaProduk }}</td>
+                {{-- <td>{{ $detailpenjualan->Produk->NamaProduk }}</td> --}}
+                <td>{{ $detailpenjualan->Produk->NamaProduk ?? 'produk telah dihapus' }}</td>
                 <td>{{ $detailpenjualan->JumlahProduk }}</td>
                 <td>{{ $detailpenjualan->Subtotal }}</td>
                 <td>

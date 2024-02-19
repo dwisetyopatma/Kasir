@@ -16,9 +16,14 @@
             </div>
         @endif
 
-        <form action="{{ route('produk.update', $produk->ProdukID) }}" method="POST" class="border rounded p-3">
+        <form action="{{ route('produk.update', $produk->ProdukID) }}" enctype="multipart/form-data" method="POST" class="border rounded p-3">
             @csrf
             @method('PUT') <!-- Use the PUT method for updates -->
+
+            <div class="mb-2">
+                <label for="Gambar" class="form-label">Gambar:</label>
+                <input type="file" class="form-control form-control-sm" name="Gambar">
+            </div>
 
             <div class="mb-2">
                 <label for="NamaProduk" class="form-label">Nama Produk:</label>
@@ -36,15 +41,8 @@
             </div>
 
             <button type="submit" class="btn btn-warning btn-sm bg-warning text-light">Update</button>
+            {{-- <button type="submit" class="btn btn-primary">Submit</button> --}}
         </form>
-
-        <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
-            @csrf
-            <input type="file" name="image">
-            <!-- Form fields for other product details -->
-            <button type="submit">Submit</button>
-        </form>
-
     </div>
 </div>
 @endsection

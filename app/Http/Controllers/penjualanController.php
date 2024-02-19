@@ -4,14 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Models\Pelanggan;
 use App\Models\Penjualan;
+use App\Models\Produk;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PenjualanController extends Controller
 {
     public function index()
     {
-        $penjualans = Penjualan::with('Pelanggan')->get();
-        // dd($penjualans);
+        $penjualans = Penjualan::with('Pelanggan', 'detailPenjualans')
+            ->withCount(['detailPenjualans as subtotal' => function ($query) {
+                $query->select(DB::raw('sum(Subtotal)'));
+            }])
+            ->get();
+
         return view('penjualan.index', compact('penjualans'));
     }
 
@@ -30,6 +36,9 @@ class PenjualanController extends Controller
             // Add other necessary validation rules
         ]);
 
+        // $produk = Produk::find($request->produk_id);
+        // // $produk->stok -= $request->jumlah; // Mengurangi stok sesuai jumlah terjual
+        // $produk->save();
         Penjualan::create($request->all());
 
         return redirect(route('penjualan.index'))->with('success', 'Penjualan created successfully.');

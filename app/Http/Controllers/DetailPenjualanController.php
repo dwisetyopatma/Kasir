@@ -30,22 +30,51 @@ class DetailPenjualanController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     */
+    //  */
+    // public function store(Request $request)
+    // {
+    //     $request->validate([
+    //         'PenjualanID' => 'required|integer',
+    //         'ProdukID' => 'required|integer',
+    //         'JumlahProduk' => 'required|integer|min:1',
+    //         // 'Subtotal' => 'required|numeric|min:0',
+    //     ]);
+
+    //     $jumlahProduk = $request->JumlahProduk;
+    //     $produk = Produk::findOrFail($request->ProdukID);
+    //     $request['Subtotal'] = $produk->Harga * $jumlahProduk;
+    //     // dd($subtotal);
+
+    //     DetailPenjualan::create($request->all());
+
+    //     return redirect(route('detailpenjualan.index'))->with('success', 'DetailPenjualan created successfully.');
+    // }
     public function store(Request $request)
     {
         $request->validate([
             'PenjualanID' => 'required|integer',
             'ProdukID' => 'required|integer',
             'JumlahProduk' => 'required|integer|min:1',
-            // 'Subtotal' => 'required|numeric|min:0',
         ]);
 
-        $jumlahProduk = $request->JumlahProduk;
         $produk = Produk::findOrFail($request->ProdukID);
-        $request['Subtotal'] = $produk->Harga * $jumlahProduk;
-        // dd($subtotal);
+        $jumlahProduk = $request->JumlahProduk;
 
-        DetailPenjualan::create($request->all());
+        // Ensure there's enough stock
+        if ($produk->Stok < $jumlahProduk) {
+            return back()->with('error', 'Not enough stock.');
+        }
+
+        $subtotal = $produk->Harga * $jumlahProduk;
+
+        $produk->decrement('Stok', $jumlahProduk);
+
+        DetailPenjualan::create([
+            'PenjualanID' => $request->PenjualanID,
+            'ProdukID' => $request->ProdukID,
+            'JumlahProduk' => $jumlahProduk,
+            'Subtotal' => $subtotal,
+        ]);
 
         return redirect(route('detailpenjualan.index'))->with('success', 'DetailPenjualan created successfully.');
     }
@@ -69,27 +98,41 @@ class DetailPenjualanController extends Controller
         return view('detailpenjualan.edit', compact(['detailPenjualan', 'produk', 'penjualan']));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
         $validatedData = $request->validate([
             'PenjualanID' => 'required|integer',
             'ProdukID' => 'required|integer',
             'JumlahProduk' => 'required|integer|min:1',
-            // 'Subtotal' => 'required|numeric|min:0',
         ]);
 
-        $jumlahProduk = $request->JumlahProduk;
-        $produk = Produk::findOrFail($request->ProdukID);
-        $validatedData['Subtotal'] = $produk->Harga * $jumlahProduk;
-
-
-
         $detailpenjualan = DetailPenjualan::findOrFail($id);
-        $detailpenjualan->update($validatedData);
 
+        $produk = Produk::findOrFail($request->ProdukID);
+        $jumlahProdukBeforeUpdate = $detailpenjualan->JumlahProduk;
+
+        // Add back the previous stock
+        $produk->increment('Stok', $jumlahProdukBeforeUpdate);
+
+        $jumlahProduk = $request->JumlahProduk;
+
+        // Ensure there's enough stock
+        if ($produk->Stok < $jumlahProduk) {
+            return back()->with('error', 'Not enough stock.');
+        }
+
+        $subtotal = $produk->Harga * $jumlahProduk;
+
+        // Update the detail penjualan
+        $detailpenjualan->update([
+            'PenjualanID' => $request->PenjualanID,
+            'ProdukID' => $request->ProdukID,
+            'JumlahProduk' => $jumlahProduk,
+            'Subtotal' => $subtotal,
+        ]);
+
+        // Deduct the updated stock
+        $produk->decrement('Stok', $jumlahProduk);
 
         return redirect(route('detailpenjualan.index'))->with('success', 'DetailPenjualan updated successfully.');
     }

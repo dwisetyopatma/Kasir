@@ -18,8 +18,13 @@
             </div>
         @endif
 
-        <form action="{{ route('produk.store') }}" method="POST" class="border rounded p-3 bg-light text-dark">
+        <form action="{{ route('produk.store') }}" method="POST" enctype="multipart/form-data" ="border rounded p-3 bg-light text-dark">
             @csrf
+
+            <div class="mb-2">
+                <label for="Gambar" class="form-label">Gambar:</label>
+                <input type="file" class="form-control" name="Gambar" required>
+            </div>
 
             <div class="mb-2">
                 <label for="NamaProduk" class="form-label">Nama Produk:</label>
@@ -39,12 +44,7 @@
             <!-- Add other necessary form fields -->
 
             <button type="submit" class="btn btn-primary btn-sm bg-primary text-light">Tambah</button>
-        </form>
-        <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
-            @csrf
-            <input type="file" name="image">
-            <!-- Form fields for other product details -->
-            <button type="submit">Submit</button>
+            {{-- <button type="submit" class="btn btn-primary">Submit</button> --}}
         </form>
     </div>
 </div>

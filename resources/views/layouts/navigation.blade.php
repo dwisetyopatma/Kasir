@@ -7,6 +7,8 @@
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
                         <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
+                        {{-- <img src="{{ asset('images/logo_wiecash-removebg-preview.png') }}" class="block h-9 w-auto fill-current text-gray-800" alt="Logo Wiecash"> --}}
+
                     </a>
                 </div>
 
@@ -54,9 +56,9 @@
                     </x-slot>
 
                     <x-slot name="content">
-                        <x-dropdown-link :href="route('profile.edit')">
+                        {{-- <x-dropdown-link :href="route('profile.edit')">
                             {{ __('Profile') }}
-                        </x-dropdown-link>
+                        </x-dropdown-link> --}}
 
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">

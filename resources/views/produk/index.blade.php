@@ -7,6 +7,7 @@
 <table class="table table-stripped">
     <thead>
         <tr>
+            <th>Gambar</th>
             <th>Nama Produk</th>
             <th>Harga</th>
             <th>Stok</th>
@@ -17,6 +18,7 @@
         @foreach ($produks as $produk)
         {{-- @dd($pelanggan) --}}
             <tr>
+                <td><img src="{{url('')}}{{ Storage::url('Gambar-produk/' . $produk->Gambar) }}" alt ="{{ $produk->NamaProduk }}" width="50" height="50"></td>
                 <td>{{ $produk->NamaProduk }}</td>
                 <td>{{ $produk->Harga }}</td>
                 <td>{{ $produk->Stok }}</td>

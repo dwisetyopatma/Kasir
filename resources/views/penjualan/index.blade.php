@@ -21,7 +21,7 @@
                 <td>{{$penjualan->PenjualanID}}</td>
                 <td>{{$penjualan->Pelanggan->NamaPelanggan}}</td>
                 <td>{{ $penjualan->TanggalPenjualan }}</td>
-                <td>{{ $penjualan->TotalHarga }}</td>
+                <td>{{ $penjualan->subtotal }}</td>
                 <td>
                     <form action="{{ route('penjualan.destroy', $penjualan->PenjualanID) }}" method="POST" class="d-inline">
                         <a href="{{ route('penjualan.edit', $penjualan->PenjualanID) }}" class="btn btn-warning btn-sm text-light">Update</a>
